@@ -1,12 +1,13 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
+import { Sun, Cloud, Wind, Droplet, Thermometer, Gauge } from 'lucide-react';
 import axios from 'axios';
 
 // Interface for the weather data structure
 interface WeatherData {
-  name: string;
-  main: {
+    name: string;
+    main: {
     temp: number;
     feels_like: number;
     humidity: number;
@@ -19,6 +20,16 @@ interface WeatherData {
     speed: number;
   };
 }
+
+const getWeatherIcon = (description: string) => {
+    const iconMap: Record<string, React.ReactNode> = {
+      'sunny': <Sun className="text-yellow-500" size={48} />,
+      'scattered clouds': <Cloud className="text-gray-400" size={48} />,
+      'clear sky': <Sun className="text-yellow-500" size={48} />,
+      'cloudy': <Cloud className="text-gray-500" size={48} />
+    };
+    return iconMap[description.toLowerCase()] || <Cloud size={48} />;
+  };
 
 const Weather: React.FC = () => {
   const [city, setCity] = useState<string>('');
@@ -119,6 +130,41 @@ const Weather: React.FC = () => {
                     </div>
                 </div>
             </div>
+            <div className="">
+      <div className="bg-white border-4 border-black p-8 w-full max-w-md space-y-6 shadow-[12px_12px_0_rgba(0,0,0,1)]">
+        <div className="flex items-center justify-between border-b-4 border-black pb-4">
+          <div>
+            <h1 className="text-6xl font-bold text-black">{weatherData.main.temp}°C</h1>    
+            <p className="text-2xl uppercase font-bold text-black border-l-4 border-black pl-2 mt-2">{weatherData.weather[0].description}</p>
+          </div>
+          <div className="border-4 border-black p-2">
+            {getWeatherIcon(weatherData.weather[0].description)}
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-3 gap-4 text-black">
+          {[
+            { Icon: Thermometer, label: 'Feels Like', value: `${weatherData.main.feels_like}°C` },
+            { Icon: Droplet, label: 'Humidity', value: `${weatherData.main.humidity}%` },
+            { Icon: Wind, label: 'Wind', value: `${weatherData.wind.speed} m/s` }
+          ].map(({ Icon, label, value }) => (
+            <div key={label} className="border-4 border-black p-4 text-center flex flex-col items-center">
+              <Icon className="text-black mb-2" size={32} />
+              <p className="uppercase text-xs font-bold mb-1">{label}</p>
+              <p className="text-xl font-bold">{value}</p>
+            </div>
+          ))}
+        </div>
+        
+        <div className="border-4 border-black p-4 flex items-center text-black">
+          <Gauge className=" mr-4" size={32} />
+          <div>
+            <p className="uppercase text-xs font-bold">Pressure</p>
+            <p className="text-xl font-bold">{weatherData.main.pressure} hPa</p>
+          </div>
+        </div>
+      </div>
+    </div>
             </>
         ) : (
             <div className="w-full gap-x-2 flex justify-center items-center">
