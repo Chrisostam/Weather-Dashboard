@@ -113,26 +113,10 @@ const Weather: React.FC = () => {
       </div>
         {weatherData ? (
             <>
-            <div className="flex w-[350px] flex-col items-start justify-between border-4 border-black bg-gradient-to-b from-white via-gray-100 to-gray-200 p-6 shadow-[8px_8px_0_0_#000] transition-transform duration-500 ease-in-out transform hover:scale-105 hover:bg-gradient-to-b hover:from-gray-200 hover:to-white shadow-[8px_8px_0_0_#000] transition-shadow duration-500 ease-in-out hover:shadow-[12px_12px_0_0_#000]">
-                <div className="group relative">
-                    <h3 className="group-hover:text-red-500 mt-3 text-2xl font-black uppercase leading-6 text-black transition-all duration-500 ease-in-out transform hover:scale-105 hover:text-blue-800">
-                    {weatherData.name}
-                    </h3>
-                </div>
-                <div className="relative mt-8 flex items-center gap-x-2">
-                    <div className="text-sm leading-6 font-bold text-gray-700 transition-all duration-500 ease-in-out transform hover:text-gray-500">
-                        <p>Temperature: {weatherData.main.temp}°C</p>
-                        <p>Description: {weatherData.weather[0].description}</p>
-                        <p>Feels like : {weatherData.main.feels_like}°C</p>
-                        <p>Humidity : {weatherData.main.humidity}%</p>
-                        <p>Pressure : {weatherData.main.pressure}</p>
-                        <p>Wind Speed : {weatherData.wind.speed}m/s</p>
-                    </div>
-                </div>
-            </div>
+            
             <div className="">
-      <div className="bg-white border-4 border-black p-8 w-full max-w-md space-y-6 shadow-[12px_12px_0_rgba(0,0,0,1)]">
-        <div className="flex items-center justify-between border-b-4 border-black pb-4">
+      <div className="bg-white border-4 border-black p-8 w-full max-w-md space-y-6 shadow-[8px_8px_0_0_#000] transition-transform duration-500 ease-in-out transform hover:scale-105 hover:bg-gradient-to-b hover:from-gray-200 hover:to-white shadow-[8px_8px_0_0_#000] transition-shadow duration-500 ease-in-out hover:shadow-[12px_12px_0_0_#000]">
+        <div className=" font-black flex items-center justify-between border-b-4 border-black pb-4">
           <div>
             <h1 className="text-6xl font-bold text-black">{weatherData.main.temp}°C</h1>    
             <p className="text-2xl uppercase font-bold text-black border-l-4 border-black pl-2 mt-2">{weatherData.weather[0].description}</p>
