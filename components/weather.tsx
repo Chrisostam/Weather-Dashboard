@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { Sun, Cloud, Wind, Droplet, Thermometer, Gauge } from 'lucide-react';
 import axios from 'axios';
 
+
+
 // Interface for the weather data structure
 interface WeatherData {
     name: string;
@@ -20,6 +22,7 @@ interface WeatherData {
     speed: number;
   };
 }
+
 
 const getWeatherIcon = (description: string) => {
     const iconMap: Record<string, React.ReactNode> = {
@@ -38,7 +41,7 @@ const Weather: React.FC = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get<WeatherData>(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=d1d108bddad838fe924af67c3b4ed8ff`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.API_KEY}`
       );
       setWeatherData(response.data);
       console.log(response.data);
@@ -84,7 +87,7 @@ const Weather: React.FC = () => {
                                 width="50"
                             >
                             <path
-                            fill-opacity="0.01"
+                            fillOpacity="0.01"
                             fill="white"
                             d="M63.6689 29.0491L34.6198 63.6685L0.00043872 34.6194L29.0496 1.67708e-05L63.6689 29.0491Z"
                             ></path>
